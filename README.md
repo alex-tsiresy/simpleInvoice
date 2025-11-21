@@ -219,8 +219,7 @@ compassDemo/
 │   │   ├── summarizer.py      # (Legacy) Document summarization
 │   │   └── classifier.py      # (Legacy) Document classification
 │   ├── requirements.txt
-│   ├── Dockerfile
-│   └── migrate_to_invoice.py  # Database migration script
+│   └── Dockerfile
 ├── frontend/                   # React frontend
 │   ├── src/
 │   │   ├── index.js           # Entry point
@@ -608,7 +607,7 @@ echo $REACT_APP_BACKEND_URL
 
 - **Connection pooling**: Pool size 10, max overflow 20
 - **Indexes**: Primary keys and user_id indexed for fast queries
-- **Migrations**: Custom SQL scripts (see backend/migrate_to_invoice.py)
+- **Schema**: SQLAlchemy ORM with automatic table creation
 
 ### Storage
 
@@ -650,17 +649,6 @@ echo $REACT_APP_BACKEND_URL
 
 Frontend auto-refreshes document list every 5 seconds to show processing progress in real-time.
 
-## Migration History
-
-The system has evolved through several iterations:
-
-1. **Classification** → **Summary**: Added document summarization feature
-2. **Summary** → **Invoice Extraction**: Pivoted to structured invoice data extraction
-
-Migration scripts:
-- `backend/migrate_to_summary.py`: Added summary fields
-- `backend/migrate_to_invoice.py`: Added invoice_data JSON field
-
 ## Technology Choices
 
 ### Why RapidOCR?
@@ -685,33 +673,3 @@ Migration scripts:
 - **No training**: No need to train/maintain custom models
 - **Flexibility**: Easy to adjust extraction schema
 
-## Contributing
-
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
-
-## License
-
-MIT License - see LICENSE file for details
-
-## Support
-
-For issues and questions:
-- **GitHub Issues**: <repository-url>/issues
-- **Documentation**: See individual service READMEs
-- **Backend API Docs**: http://localhost:8000/docs (when running)
-
-## Roadmap
-
-Future enhancements:
-- [ ] Batch document processing
-- [ ] Support for more document types (receipts, purchase orders)
-- [ ] Enhanced invoice field extraction (line items, taxes)
-- [ ] Document versioning
-- [ ] OCR result caching
-- [ ] Multi-language UI support
-- [ ] Export to accounting software (QuickBooks, Xero)
-- [ ] Mobile app
